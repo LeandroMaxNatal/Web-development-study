@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="telListApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Telephone List Example</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+    <style>
+        .jumbotron {
+            width: 450px;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+        
+        .form-control {
+            margin-bottom: 5px;
+        }
+
+        .selected {
+            background-color: darkkhaki;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="lib/angular/angular.min.js"></script>
+    <script>
+        angular.module('telListApp', []);
+        angular.module('telListApp').controller('telListCtrl', function($scope) {
+            $scope.app = 'Telephone List';
+            $scope.contacts = [
+                {name: 'Leandro', telephone: '99999-9999'},
+                {name: 'Mary', telephone: '99999-9988'},
+                {name: 'Peter', telephone: '99999-9977'}
+            ];
+            $scope.telOperators = [
+                {name: 'Oi', code: 31, category: 'Mobile'},
+                {name: 'Claro', code: 21, category: 'Mobile'},
+                {name: 'Vivo', code: 15, category: 'Mobile'},
+                {name: 'Gvt', code: 02, category: 'Fixed'},
+                {name: 'Cabo telecom', code: 01, category: 'Fixed'}
+            ];
+            $scope.addContact = function(contact) {
+                $scope.contacts.push(angular.copy(contact));
+                delete $scope.contact;
+            };
+            $scope.class1 = 'selected';
+            $scope.class2 = 'bold';
+
+        });
+    </script>
+
+</head>
+<body ng-controller="telListCtrl">
+    <div class="jumbotron">
+        <h3>{{app}}</h3>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Tel. Number</th>
+                <th>Tel Operator</th>
+            </tr>
+            <tr ng-class="" ng-repeat="contact in contacts">
+                <td><input type="checkbox" ng-model="contact.selected"></td>
+                <td>{{contact.name}}</td>
+                <td>{{contact.telephone}}</td>
+                <td>{{contact.telOperator.name}}</td>
+            </tr>
+        </table>
+        <input class="form-control" ng-model="contact.name" type="text" placeholder="Name">
+        <input class="form-control" ng-model="contact.telephone" type="text" placeholder="Telephone">
+        <select class="form-control" ng-model="contact.telOperator" ng-options="telOperator.name group by telOperator.category for telOperator in telOperators">
+            <option value="">Select one telephone operator</option>
+        </select>
+        <button class="btn btn-primary btn-block" ng-click="addContact(contact)" 
+        ng-disabled="!contact.name || !contact.telephone">Add Contact</button>
+        <button class="btn btn-danger btn-block">Delect Contact</button>
+    </div>
+</body>
+</html>
