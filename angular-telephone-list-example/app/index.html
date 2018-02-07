@@ -7,6 +7,12 @@
     <title>Telephone List Example</title>
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         .jumbotron {
             width: 450px;
             text-align: center;
@@ -52,9 +58,6 @@
                 $scope.contacts.push(angular.copy(contact));
                 delete $scope.contact;
             };
-            $scope.class1 = 'selected';
-            $scope.class2 = 'bold';
-
         });
     </script>
 
@@ -69,7 +72,7 @@
                 <th>Tel. Number</th>
                 <th>Tel Operator</th>
             </tr>
-            <tr ng-class="" ng-repeat="contact in contacts">
+            <tr ng-class="{selected: contact.selected, bold: contact.selected}" ng-repeat="contact in contacts">
                 <td><input type="checkbox" ng-model="contact.selected"></td>
                 <td>{{contact.name}}</td>
                 <td>{{contact.telephone}}</td>
