@@ -75,8 +75,8 @@
 <body ng-controller="telListCtrl">
     <div class="jumbotron">
         <h3>{{app}}</h3>
-        <table class="table">
-            <tr>
+        <table ng-show="contacts.length > 0" class="table">
+            <tr >
                 <th></th>
                 <th>Name</th>
                 <th>Tel. Number</th>
