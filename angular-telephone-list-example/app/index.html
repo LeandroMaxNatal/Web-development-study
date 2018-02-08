@@ -64,7 +64,7 @@
                 });
             };
             $scope.isSelectedContact = function(contacts) {
-                return !contacts.some(function(contact) {
+                return contacts.some(function(contact) {
                     return contact.selected;
                 });
             }
@@ -97,7 +97,7 @@
         <button class="btn btn-primary btn-block" ng-click="addContact(contact)" 
         ng-disabled="!contact.name || !contact.telephone">Add Contact</button>
         <button class="btn btn-danger btn-block" ng-click="delContact(contacts)"
-        ng-disabled="isSelectedContact(contacts)">Delect Contact</button>
+        ng-disabled="!isSelectedContact(contacts)">Delect Contact</button>
     </div>
 </body>
 </html>
